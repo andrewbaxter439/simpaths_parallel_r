@@ -12,3 +12,4 @@ output/
 tempfiles
 log.out
 
+*.jar
