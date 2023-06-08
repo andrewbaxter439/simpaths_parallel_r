@@ -2,15 +2,16 @@ seeds <- 401:424
 
 
 
-class_paths <- vapply(
-  c("labsim/target/model-1.0.0.jar", 
-    "labsim/target/JAS-mine-core-4.1.0-jar-with-dependencies.jar",
-    dir("labsim/target/dependency", recursive = TRUE, full.names = TRUE)),
-  \(path) file.path(getwd(), path),
-  character(1),
-  USE.NAMES = FALSE
-)
+# class_paths <- vapply(
+#   c("labsim/target/model-1.0.0.jar", 
+#     "labsim/target/JAS-mine-core-4.1.0-jar-with-dependencies.jar",
+#     dir("labsim/target/dependency", recursive = TRUE, full.names = TRUE)),
+#   \(path) file.path(getwd(), path),
+#   character(1),
+#   USE.NAMES = FALSE
+# )
 
+class_paths <- "model.jar"
 
 # test one run ------------------------------------------------------------
 
@@ -24,7 +25,7 @@ library(rJava)
 
 SimPathsMultiRun <- .jnew("simpaths.experiment.SimPathsMultiRun")
 
-.jcall(SimPathsMultiRun, method = "main", , c("-r", "301", "-g", "false", "-n", "1", "-f"))
+.jcall(SimPathsMultiRun, method = "main", , c("-r", "301", "-g", "false", "-n", "1", "-p", "75000", "-s", "2017", "-e", "2022", "-f"))
 .jcall(SimPathsMultiRun, method = "main", , c("-r", "401", "-g", "false", "-n", "1", "-f"))
 .jcall(SimPathsMultiRun, method = "main", , c("-r", "502", "-g", "false", "-n", "1", "-f"))
 .jcall(SimPathsMultiRun, method = "main", , c("-r", "503", "-g", "false", "-n", "1", "-f"))
