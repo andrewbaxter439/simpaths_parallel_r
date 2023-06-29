@@ -15,4 +15,4 @@ prop <- dir(file.path("output", "logs"), recursive = TRUE, full.names = TRUE) |>
   unlist() |> 
   mean()
 
-cat("Percent complete:", sprintf("%.1f%%", prop * 100))
+cat("Percent complete:", sprintf("%.1f%%", prop * 100), "\n")
