@@ -1,6 +1,8 @@
-library(stringr)
-library(purrr)
-library(lubridate)
+suppressPackageStartupMessages({
+  library(stringr)
+  library(purrr)
+  library(lubridate)
+})
 
 get_tail <- function(file) {
   system(paste("tail", file, "-n 1"), intern = TRUE)
