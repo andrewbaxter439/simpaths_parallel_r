@@ -32,4 +32,4 @@ end <- tails |>
 
 duration <- end - start
 
-cat("Total run time:", sprintf("%.2f", duration), attr(duration, "units"))
+cat("Total run time:", sprintf("%.2f", duration), attr(duration, "units"), "\n")
