@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript --vanilla
+#!/usr/bin/env Rscript
 
 n_runs_env <- commandArgs(trailingOnly = TRUE)[1]
 
