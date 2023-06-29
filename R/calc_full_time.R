@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 
 suppressPackageStartupMessages({
   library(stringr)
@@ -30,4 +30,6 @@ end <- tails |>
   as_datetime() |> 
   max()
 
-end - start
+duration <- end - start
+
+cat("Total run time:", sprintf("%.2f", duration), attr(duration, "units"))
