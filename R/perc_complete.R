@@ -7,7 +7,13 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 
-n_runs <- as.numeric(args[1])
+if (length(args) > 0) {
+  n_runs <- as.numeric(args[1])
+} else if (exists("n_runs_env")) {
+  n_runs <- n_runs_env
+} else {
+  n_runs <- input("How many runs?")
+}
 
 prop <- dir(file.path("output", "logs"), recursive = TRUE, full.names = TRUE) |> 
   str_subset(".*txt$") |> 
