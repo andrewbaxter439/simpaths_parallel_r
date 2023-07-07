@@ -32,4 +32,8 @@ end <- tails |>
 
 duration <- end - start
 
-cat("Total run time:", sprintf("%.2f", duration), attr(duration, "units"), "\n")
+message <- paste("Total run time:", sprintf("%.2f", duration), attr(duration, "units"), "\n")
+
+cat(message)
+
+invisible(message)

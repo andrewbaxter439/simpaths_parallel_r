@@ -12,7 +12,7 @@ if (length(args) > 0) {
 } else if (exists("n_runs_env")) {
   n_runs <- n_runs_env
 } else {
-  n_runs <- input("How many runs?")
+  n_runs <- readline("How many runs?")
 }
 
 prop <- dir(file.path("output", "logs"), recursive = TRUE, full.names = TRUE) |> 
@@ -23,4 +23,9 @@ prop <- dir(file.path("output", "logs"), recursive = TRUE, full.names = TRUE) |>
   unlist() |> 
   mean()
 
-cat("Percent complete:", sprintf("%.1f%%", prop * 100), "\n")
+
+message <- paste("Percent complete:", sprintf("%.1f%%", prop * 100), "\n")
+
+cat(message)
+
+invisible(message)

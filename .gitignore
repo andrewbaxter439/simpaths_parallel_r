@@ -2,14 +2,12 @@
 .Rhistory
 .RData
 .Ruserdata
-
 .idea/
-
 labsim/
 bin/
 input/
 output/
 tempfiles
 log.out
-
 *.jar
+testGroups

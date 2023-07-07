@@ -1,15 +1,12 @@
-#!/usr/bin/env Rscript
+n_runs_env <- 60
 
 
-args_in <- commandArgs(trailingOnly = TRUE)
+text_again <- TRUE
 
-n_runs_env <- args_in[1]
-
-
-time_message <- source("R/calc_full_time.R")
-progress_message <- source("R/perc_complete.R")
-
-if ("-textme" %in% args_in) {
+while (text_again) {
+  
+  time_message <- source("R/calc_full_time.R")
+  progress_message <- source("R/perc_complete.R")
   response <- httr::GET(URLencode(
     paste0(
       "https://api.telegram.org/bot",
@@ -21,4 +18,8 @@ if ("-textme" %in% args_in) {
       Sys.getenv("telegram_chatid")
     )
   ))
+  
+  if (grepl("100.0%", progress_message$value)) text_again <- FALSE
+  
+  Sys.sleep(1800)
 }
