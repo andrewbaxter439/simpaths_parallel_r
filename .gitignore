@@ -11,3 +11,4 @@ tempfiles
 log.out
 *.jar
 testGroups
+input
