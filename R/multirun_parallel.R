@@ -6,7 +6,7 @@ library(doParallel)
 cores <- parallel::detectCores()
 
 clusters <- 10 
-n_runs <- 10 
+n_runs <- 5 
 
 cl <- parallel::makePSOCKcluster(clusters)
 
@@ -28,7 +28,7 @@ foreach(seed = seed_starts, wait = staggered_starts, .packages = "rJava", .verbo
                                                 "-n", as.character(n_runs), 
                                                 "-s", "2017",
                                                 "-e", "2025",
-                                                "-p", "140000",
+                                                "-p", "50000",
                                                 "-f"
                                                 ))
 }
