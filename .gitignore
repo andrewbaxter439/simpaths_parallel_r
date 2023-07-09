@@ -12,3 +12,4 @@ log.out
 *.jar
 testGroups
 simpaths docs
+input

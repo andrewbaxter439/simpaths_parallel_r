@@ -5,8 +5,8 @@ class_paths <- "simpaths.jar"
 library(doParallel)
 cores <- parallel::detectCores()
 
-clusters <- 10 
-n_runs <- 10 
+clusters <- 50 
+n_runs <- 20 
 
 cl <- parallel::makePSOCKcluster(clusters)
 
@@ -28,7 +28,7 @@ foreach(seed = seed_starts, wait = staggered_starts, .packages = "rJava", .verbo
                                                 "-n", as.character(n_runs), 
                                                 "-s", "2017",
                                                 "-e", "2025",
-                                                "-p", "140000",
+                                                "-p", "150000",
                                                 "-f"
                                                 ))
 }
