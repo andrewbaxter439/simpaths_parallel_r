@@ -3,6 +3,16 @@ n_runs_env <- 1000
 
 text_again <- TRUE
 
+response <- httr::GET(URLencode(
+    paste0(
+      "https://api.telegram.org/bot",
+      Sys.getenv("Notify_bot_key"),
+      "/sendMessage?text=",
+      "Starting a new cycle of ", n_runs_env, " runs",
+      "&chat_id=",
+      Sys.getenv("telegram_chatid")
+      )))
+
 while (text_again) {
   
   time_message <- source("R/calc_full_time.R")
