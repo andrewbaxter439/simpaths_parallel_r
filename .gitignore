@@ -13,3 +13,4 @@ log.out
 testGroups
 simpaths docs
 input
+out_data/
