@@ -1,44 +1,19 @@
-# library(tidyverse)
-# library(arrow)
-# 
-# sim_pops <- dir(
-#   "output",
-#   full.names = TRUE,
-#   recursive = TRUE,
-#   include.dirs = FALSE
-# ) |> 
-#   str_subset("_\\d+00.*Person\\.csv") |> 
-#   set_names(nm = ~str_extract(.x, "(?<=\\d{8}_)\\d+00")) |> 
-#   map(read_csv_arrow, col_select = -last_col())
-# 
-# 
-# sim_pops[[1]] |> names()
-# 
-# 
-# all_runs <- sim_pops |> 
-#   imap(~ 
-#          .x |> 
-#          mutate(
-#            run = run + as.integer(.y) - 1
-#   )) |> 
-#   reduce(bind_rows)
-# 
-# out_dir <- file.path("out_data", "test_run")
-# 
-# all_runs |> 
-#   group_by(run) |> 
-#   write_dataset(out_dir)
-
-
-
 # do it file-by-file ------------------------------------------------------
 library(tidyverse)
 library(arrow)
 library(furrr)
 
-plan(multicore, workers = 20)
+args <- commandArgs(trailingOnly = TRUE)
 
-out_dir <- file.path("out_data", "test_run")
+if (length(args) == 0) {
+    dir_out <- readline("Output directory `out_data/...`:\n")
+} else {
+    dir_out <- args[1]
+}
+
+plan(multicore, workers = 5)
+
+out_dir <- file.path("out_data", dir_out)
 
 person_files <- dir(
   "output",
