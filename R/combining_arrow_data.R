@@ -32,7 +32,7 @@ benefitunit_files <- dir(
 ) |>
   set_names(nm = ~ str_extract(.x, "(?<=\\d{8}_)\\d+00"))
 
-all_dat <- person_files |>
+person_files |>
   future_imap(\(p_file, seed) {
     d_person <- read_csv_arrow(
       p_file,
@@ -66,16 +66,16 @@ all_dat <- person_files |>
       )
     )
     
+    gc()
+
     left_join(
       d_person,
       d_bu,
       by = join_by(run, time, idBenefitUnit == id_BenefitUnit)
     ) |> 
-      mutate(run = run + as.integer(seed) - 1)
+      mutate(run = run + as.integer(seed) - 1) |>
+  group_by(run) |>
+  write_dataset(out_dir)
     
   })
 
-all_dat |> 
-  reduce(bind_rows) |> 
-  group_by(run, time) |>
-  write_dataset(out_dir)
