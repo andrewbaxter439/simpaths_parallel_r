@@ -6,8 +6,12 @@ args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) == 0) {
   dir_out <- readline("Output directory `out_data/...`:\n")
+} else if (length(args) == 2){
+  dir_out <- args[1]
+  dir_in <- args[2]
 } else {
   dir_out <- args[1]
+  dir_in <- "output"
 }
 
 plan(multicore, workers = 5)
@@ -15,7 +19,7 @@ plan(multicore, workers = 5)
 out_dir <- file.path("out_data", dir_out, "combined_data")
 
 person_files <- dir(
-  "output",
+  dir_in,
   full.names = TRUE,
   recursive = TRUE,
   pattern = "Person\\.csv$",
@@ -24,7 +28,7 @@ person_files <- dir(
   set_names(nm = ~ str_extract(.x, "(?<=\\d{8}_)\\d+00"))
 
 benefitunit_files <- dir(
-  "output",
+  dir_in,
   full.names = TRUE,
   recursive = TRUE,
   pattern = "BenefitUnit\\.csv$",

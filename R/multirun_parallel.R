@@ -5,7 +5,7 @@ class_paths <- "simpaths.jar"
 library(doParallel)
 cores <- parallel::detectCores()
 
-clusters <- 75 
+clusters <- 65 
 n_runs <- 1000 
 
 cl <- parallel::makePSOCKcluster(clusters)
