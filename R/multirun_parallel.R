@@ -5,8 +5,8 @@ class_paths <- "simpaths.jar"
 library(doParallel)
 cores <- parallel::detectCores()
 
-clusters <- 50 
-n_runs <- 20 
+clusters <- 75 
+n_runs <- 1000 
 
 cl <- parallel::makePSOCKcluster(clusters)
 
@@ -15,9 +15,10 @@ registerDoParallel(cl)
 seed_starts <- purrr::map_int(seq(1, clusters), ~ .x * 100)
 staggered_starts <- purrr::map_int(seq(1, clusters), ~ .x * 20 - 20)
 
+n_runs_vec <- vctrs::vec_count(rep(1:n_runs, 75))$count
 
 t1 <- Sys.time()
-foreach(seed = seed_starts, wait = staggered_starts, .packages = "rJava", .verbose = TRUE) %dopar% {
+foreach(seed = seed_starts, wait = staggered_starts, n_runs = n_runs_vec, .packages = "rJava", .verbose = TRUE) %dopar% {
   options(java.parameters = "-Xmx4g")
   Sys.sleep(wait)
   .jinit()
