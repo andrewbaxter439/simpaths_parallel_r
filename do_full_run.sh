@@ -134,9 +134,4 @@ rm -r ./output/202*/database ./output/202*/input
 # WARNING: I/O heavy, saturates SATA3, requires extra temporary space
 sh ./remove_trailing_commas.sh
 
-# Text myself that it's all done
-{ # try
-  curl "https://api.telegram.org/bot${Notify_bot_key}/sendMessage?text=Done%20copying%20all%20files&chat_id=${telegram_chatid}" &&
-} || { # catch
-  echo "Failed to send a confirmation, logging success anyway."
-}
+echo "Successfully completed runs"
