@@ -120,12 +120,13 @@ then
 fi
 
 # Runs 1,000 runs as 50 sequential runs of n=20 with 50 unique starting seeds
-seq 100 100 5000 | parallel java -cp simpaths.jar simpaths.experiment.SimPathsMultiRun -r {} -n $BATCH_SIZE \
-                                                                                             -p $POPULATION_SIZE \
-                                                                                             -s $START_YEAR \
-                                                                                             -e $END_YEAR \
-                                                                                             -g $GUI \
-                                                                                             -f
+parallel java -cp simpaths.jar simpaths.experiment.SimPathsMultiRun -r {} -n $BATCH_SIZE \
+                                                                          -p $POPULATION_SIZE \
+                                                                          -s $START_YEAR \
+                                                                          -e $END_YEAR \
+                                                                          -g $GUI \
+                                                                          -f \
+																		  ::: {100..5000..100}
 
 # Tidy output folders, removing empty database folders and redundant input folders (keeps csvs)
 rm -r ./output/202*/database ./output/202*/input
