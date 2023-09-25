@@ -14,7 +14,7 @@ set -o errexit -o noclobber -o pipefail -o nounset
 usage() {
   echo "Usage: sh ./$0 <[options]>
         Options:
-                -n    --batch_size        The number od simulations to run in one batch, strictly integer and positive
+                -n    --batch_size        The number of simulations to run in one batch, strictly integer and positive
                 -p    --population_size   The size of a population, strictly integer and positive
                 -s    --start_year        The year simulation starts, from 2010 to 2023
                 -e    --end_year          The year simulation ends, from 2010 to 2023, greater or equal than \`-s\`
