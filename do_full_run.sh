@@ -14,7 +14,7 @@ set -o errexit -o noclobber -o pipefail -o nounset
 usage() {
   echo "Usage: sh ./$0 <[options]>
         Options:
-                -n    --batch_size        The number od simulations to run in one batch, strictly integer and positive
+                -b    --batch_size        The number od simulations to run in one batch, strictly integer and positive
                 -p    --population_size   The size of a population, strictly integer and positive
                 -s    --start_year        The year simulation starts, from 2010 to 2023
                 -e    --end_year          The year simulation ends, from 2010 to 2023, greater or equal than \`-s\`
@@ -28,7 +28,7 @@ exit_abnormal() {
 }
 
 # parse input arguments
-VALID_ARGS="$(getopt -o n:p:s:e:g: -l batch_size:,population_size:,start_year:,end_year:,gui: --name "$0" -- "$@")"
+VALID_ARGS="$(getopt -o b:p:s:e:g: -l batch-size:,population:,start_year:,end_year:,gui: --name "$0" -- "$@")"
 
 eval set -- "$VALID_ARGS"
 
@@ -41,7 +41,7 @@ re_isanum='^[0-9]*[1-9][0-9]*$'
 while true
 do
     case "$1" in
-        -n|--batch_size)
+        -b|--batch_size)
             # if $2 not whole:
             if ! [[ $2 =~ $re_isanum ]]
             then
@@ -53,7 +53,7 @@ do
             BATCH_SIZE=$2
             shift 2
             ;;
-        -p|--population_size)
+        -p|--population)
             # if $2 not whole:
             if ! [[ $2 =~ $re_isanum ]]
             then
@@ -103,8 +103,8 @@ do
             shift 2
             ;;
         --)
-            echo "All parameters must be provided" >&2
-            exit_abnormal
+            shift
+            break
             ;;
         *)
             echo "Not implemented: $1" >&2
