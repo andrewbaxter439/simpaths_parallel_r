@@ -119,6 +119,23 @@ then
   exit_abnormal
 fi
 
+if ! test -f simpaths.jar
+then
+    echo "This must be run in the same directory as the compiled (with dependencies) \`simpaths.jar\`"
+    exit_abnormal
+fi
+
+if ! test -d input
+then
+    echo "This must be run in the same directory as the \`input/\` folder"
+    exit_abnormal
+fi
+
+if ! test -d output/logs
+then
+    mkdir -p output/logs
+fi
+
 # Runs 1,000 runs as 50 sequential runs of n=20 with 50 unique starting seeds
 seq 100 100 5000 | parallel java -cp simpaths.jar simpaths.experiment.SimPathsMultiRun -r {} -n $BATCH_SIZE \
                                                                                              -p $POPULATION_SIZE \
